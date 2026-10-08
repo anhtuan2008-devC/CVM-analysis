@@ -63,3 +63,34 @@ Proceeding to coding without formal source mapping. Rejected because it violates
 
 #### Final Status:
 APPROVED / PASS
+
+---
+
+### Decision ID: DEC-0003
+- **Step:** Step 2
+- **Case:** CASE-02
+- **Change ID:** CHG-0003
+
+#### Problem:
+Need to implement foundational result and execution semantics (`FailureStatus`, `EstimateResult`, `is_execution_valid`, `is_approximation_valid`, and `CardinalityEstimator` concept) strictly enforcing invariants and forbidding sentinel failure encodings.
+
+#### Observation:
+PLAN Section 5, 81, and 82 define explicit contracts: `has_value() <=> status == Success`, `value()` on failure is a contract violation throwing `logic_error`, CSV failure output is `"null"`, and `NumericFailure`/`ResourceFailure` are never counted as approximation failures.
+
+#### Plan Requirement:
+Section 18 of `AGENTS.md` mandates implementing and testing only foundational semantics in CASE-02, barring algorithmic implementations until later cases.
+
+#### Idea:
+Create `include/cvm/core/types.hpp`, `include/cvm/core/concepts.hpp`, and standalone test suite in `tests/unit/test_case02.cpp`.
+
+#### Decision:
+Implemented `FailureStatus` enum, `EstimateResult` class with private constructor and static factories, status predicates, schema enums (`AlgorithmId`, `WorkloadId`, `ThresholdState`), provenance structure `RunProvenance`, and `CardinalityEstimator` concept.
+
+#### Why:
+Guarantees typesafe and mathematically sound error handling across all downstream CVM algorithm implementations.
+
+#### Alternative(s):
+Returning `double` with `-1` or `NaN` on failure. Strictly rejected per PLAN Section 5.2.
+
+#### Final Status:
+APPROVED / PASS

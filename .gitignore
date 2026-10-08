@@ -1,0 +1,19 @@
+# Build directories
+build/
+bin/
+lib/
+
+# Temporary files
+*.o
+*.a
+*.so
+*.out
+/tmp/
+
+# Cache
+.cache/
+.ninja_*
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile

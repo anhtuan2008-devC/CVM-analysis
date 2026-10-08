@@ -15,3 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
   - Mapped all 28 source claims (C01–C28) and 38 project methodologies (M01–M38) to explicit, verifiable locators in S1 (Chakraborty et al. 2023) and S2 (Knuth 2023).
   - Established `docs/agent-execution/source-traceability.md`.
   - Passed `GATE-01`.
+- **[CASE-02] Infrastructure and Result Semantics (`CHG-0003` / `DEC-0003`):**
+  - Implemented `FailureStatus`, `EstimateResult`, status invariants, execution validity predicates, schema enums (`AlgorithmId`, `WorkloadId`, `ThresholdState`), `RunProvenance`, and `CardinalityEstimator` concept.
+  - Added unit test suite `tests/unit/test_case02.cpp` verifying 72 assertions and contract enforcement.
+  - Passed `GATE-02`.
