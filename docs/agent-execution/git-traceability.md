@@ -11,4 +11,5 @@ This document maps PLAN sections, cases, decisions, sources, and tests to Git co
 | CASE-04 | CHG-0005 | DEC-0005 | 61093ee | 1aa7e09 | include/cvm/core/rank.hpp, include/cvm/ds/cutoff64.hpp, tests/unit/test_case04.cpp | TEST-CASE04-RANK | PASS |
 | CASE-05 | CHG-0006 | DEC-0006 | 1aa7e09 | 1770233 | include/cvm/core/cvm_a1.hpp, tests/unit/test_case05.cpp | TEST-CASE05-A1 | PASS |
 | CASE-06 | CHG-0007 | DEC-0007 | 1770233 | da371dd | include/cvm/core/cvm_w.hpp, tests/unit/test_case06.cpp, CMakeLists.txt | TEST-CASE06-W | PASS |
-| CASE-07 | CHG-0008 | DEC-0008 | da371dd | 0b427a3 | include/cvm/ds/key_index_map.hpp, include/cvm/ds/dense_key_set.hpp, tests/unit/test_case07.cpp, CMakeLists.txt | TEST-CASE07-DATASTRUCTURES | PASS |
+| CASE-07 | CHG-0008 | DEC-0008 | da371dd | 80bae88 | include/cvm/ds/key_index_map.hpp, include/cvm/ds/dense_key_set.hpp, tests/unit/test_case07.cpp, CMakeLists.txt | TEST-CASE07-DATASTRUCTURES | PASS |
+| CASE-08 | CHG-0009 | DEC-0009 | 80bae88 | ee39aea | include/cvm/ds/indexed_heap.hpp, include/cvm/core/knuth_d.hpp, tests/unit/test_case08.cpp, CMakeLists.txt | TEST-CASE08-KNUTHD | PASS |

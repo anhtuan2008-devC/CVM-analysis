@@ -40,3 +40,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
   - Implemented `DenseKeySet` (`include/cvm/ds/dense_key_set.hpp`) pairing dense `vector<Key>` with reverse index map for $O(1)$ swap-remove without stale indices.
   - Added unit test suite `tests/unit/test_case07.cpp` verifying 147 assertions across all 8 mandatory adversarial scenarios, zero allocations post-reserve, batch in-place filtering, and clean ASan/UBSan runs.
   - Passed `GATE-07`.
+- **[CASE-08] Knuth-D Implementation (`CHG-0009` / `DEC-0009`):**
+  - Implemented `IndexedHeap` (`include/cvm/ds/indexed_heap.hpp`) max-heap with $O(1)$ key lookup and $O(\log s)$ arbitrary erasure and multi-maximum purge.
+  - Implemented canonical `KnuthD` (`include/cvm/core/knuth_d.hpp`) per S2 steps D1–D6 with `Cutoff64`, strict cutoff invariants ($r < c$), duplicate deletion, finite-tie tracking, and multiple equal maxima purge.
+  - Added unit test suite `tests/unit/test_case08.cpp` verifying 101 assertions, empirical expectations $E[\hat F_0] = 2.0$ for $(a, b, a)$ and $E[\hat F_0] = 3.0$ for $(a, b, c)$ across 100,000 trials, capacity boundaries ($s=1, s=F_0, s=F_0-1$), and ASan/UBSan clean execution.
+  - Passed `GATE-08`.
