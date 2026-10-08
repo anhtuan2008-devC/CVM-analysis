@@ -12,4 +12,5 @@ This document maps PLAN sections, cases, decisions, sources, and tests to Git co
 | CASE-05 | CHG-0006 | DEC-0006 | 1aa7e09 | 1770233 | include/cvm/core/cvm_a1.hpp, tests/unit/test_case05.cpp | TEST-CASE05-A1 | PASS |
 | CASE-06 | CHG-0007 | DEC-0007 | 1770233 | da371dd | include/cvm/core/cvm_w.hpp, tests/unit/test_case06.cpp, CMakeLists.txt | TEST-CASE06-W | PASS |
 | CASE-07 | CHG-0008 | DEC-0008 | da371dd | 80bae88 | include/cvm/ds/key_index_map.hpp, include/cvm/ds/dense_key_set.hpp, tests/unit/test_case07.cpp, CMakeLists.txt | TEST-CASE07-DATASTRUCTURES | PASS |
-| CASE-08 | CHG-0009 | DEC-0009 | 80bae88 | ee39aea | include/cvm/ds/indexed_heap.hpp, include/cvm/core/knuth_d.hpp, tests/unit/test_case08.cpp, CMakeLists.txt | TEST-CASE08-KNUTHD | PASS |
+| CASE-08 | CHG-0009 | DEC-0009 | 80bae88 | 5445ef0 | include/cvm/ds/indexed_heap.hpp, include/cvm/core/knuth_d.hpp, tests/unit/test_case08.cpp, CMakeLists.txt | TEST-CASE08-KNUTHD | PASS |
+| CASE-09 | CHG-0010 | DEC-0010 | 5445ef0 | 770ccaf | include/cvm/core/knuth_dprime.hpp, tests/unit/test_case09.cpp, CMakeLists.txt | TEST-CASE09-DPRIME | PASS |

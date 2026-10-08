@@ -284,3 +284,34 @@ Using treap like Knuth's note or `std::map`. Rejected because indexed binary hea
 
 #### Final Status:
 APPROVED / PASS
+
+---
+
+### Decision ID: DEC-0010
+- **Step:** Step 9
+- **Case:** CASE-09
+- **Change ID:** CHG-0010
+
+#### Problem:
+Need to implement Knuth Algorithm D' ("A Coarser Method", `KnuthDprime<Key>`) strictly according to verified S2 semantics (p. 5, step D6') and PLAN Section 7.6, 16, 17.2, using binary cutoff $p = 2^{-l}$, integer level exponent $l \in [0, 65]$, machine-exact bit shift acceptance predicates, cascade purging, and zero floating-point operations in acceptance.
+
+#### Observation:
+Algorithm D' modifies step D6: when $|B|=s$ and incoming rank is accepted under level $l$, the algorithm increments $l \leftarrow l+1$ and purges all stored items with $r_{\text{stored}} \ge 2^{64-l}$. If buffer remains full ($|B|=s$) and incoming item is still accepted, the halving cascade repeats. If $l \ge 65$, finite resolution limit is reached, recording a resolution event. Furthermore, for stream $(a, b, c)$ with $s=1$, S2 Exercise 8 proves $\Pr[\hat F_0 = 0] = 2/7$ and estimates are powers of 2.
+
+#### Plan Requirement:
+Section 25 of `AGENTS.md` and Section 7.6, 16 of `PLAN.md` mandate binary cutoff, integer level $l$, pure integer acceptance (`dprime_accepts`), cascade purge, strict prohibition of `double p` or approximate logarithms, and testing $l=0, 1, 63, 64, 65$, cascades, duplicates, ties, multiple maxima, exact capacity, and sanitizers.
+
+#### Idea:
+Implement `KnuthDprime<Key>` in `include/cvm/core/knuth_dprime.hpp` using `IndexedHeap`, integer level $l$, pure integer bit shifts `1ULL << (64 - l)`, `dprime_accepts()`, resolution limit tracking, and comprehensive verification in `tests/unit/test_case09.cpp`.
+
+#### Decision:
+Implemented `KnuthDprime<Key>`. Verified all 49 assertions, confirmed multiple-level cascade (e.g. $l=0 \to 58$ in one update), resolution event at $l \ge 65$, verified Source Fixture F4 ($\Pr[\hat F_0 = 0] = 2/7$ and powers of 2 estimates over 50,000 trials), and confirmed clean ASan/UBSan runs.
+
+#### Why:
+Provides the canonical, machine-exact realization of Knuth's dyadic Algorithm D' without floating-point error drift.
+
+#### Alternative(s):
+Using floating-point `pow(2, -l)` or floating-point comparisons. Strictly prohibited per AGENTS.md Section 25.
+
+#### Final Status:
+APPROVED / PASS

@@ -45,3 +45,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
   - Implemented canonical `KnuthD` (`include/cvm/core/knuth_d.hpp`) per S2 steps D1–D6 with `Cutoff64`, strict cutoff invariants ($r < c$), duplicate deletion, finite-tie tracking, and multiple equal maxima purge.
   - Added unit test suite `tests/unit/test_case08.cpp` verifying 101 assertions, empirical expectations $E[\hat F_0] = 2.0$ for $(a, b, a)$ and $E[\hat F_0] = 3.0$ for $(a, b, c)$ across 100,000 trials, capacity boundaries ($s=1, s=F_0, s=F_0-1$), and ASan/UBSan clean execution.
   - Passed `GATE-08`.
+- **[CASE-09] Knuth-Dprime Implementation (`CHG-0010` / `DEC-0010`):**
+  - Implemented canonical `KnuthDprime` (`include/cvm/core/knuth_dprime.hpp`) per S2 p. 5 step D6' ("A Coarser Method") using integer binary level $l$, pure integer bit shifts ($2^{64-l}$), zero floating-point operations in acceptance, and cascade purging.
+  - Implemented resolution limit handling ($l \ge 65$) returning `NumericFailure` without clamping or restarting.
+  - Added unit test suite `tests/unit/test_case09.cpp` verifying 49 assertions, multi-level cascade execution ($l=0 \to 58$), duplicate handling, ties, and Source Fixture F4 ($\Pr[\hat F_0 = 0] = 2/7$ and powers of 2 estimates over 50,000 trials) with clean ASan/UBSan runs.
+  - Passed `GATE-09`.
