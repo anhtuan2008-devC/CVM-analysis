@@ -125,3 +125,34 @@ Using `std::mt19937_64` or `rand()`. Rejected due to non-standard bit extraction
 
 #### Final Status:
 APPROVED / PASS
+
+---
+
+### Decision ID: DEC-0005
+- **Step:** Step 4
+- **Case:** CASE-04
+- **Change ID:** CHG-0005
+
+#### Problem:
+Need an exact finite representation for volatility ranks and cutoff thresholds without using floating-point comparisons in acceptance predicates, and implement exact dyadic integer level semantics for Algorithm D'.
+
+#### Observation:
+PLAN Sections 11, 14, 15, and 16 require `Cutoff64` (`ONE` or `RANK(c)`), exact predicate $u_r < p \iff r < c$, integer binary level $l$ for D' ($l=0 \to$ accept all, $1 \le l \le 64 \to r < 2^{64-l}$, $l \ge 65 \to$ reject all), and exact mathematical coupling level derivation $l = 65 - \lfloor\log_2(2c+1)\rfloor$.
+
+#### Plan Requirement:
+Section 20 of `AGENTS.md` mandates pure integer acceptance, barring floats in cutoff decisions and testing boundaries ($0, 2^{64}-1, l=0, 1, 63, 64, 65, >65$).
+
+#### Idea:
+Create `include/cvm/ds/cutoff64.hpp` and `include/cvm/core/rank.hpp` with exact integer logic, bit manipulation, and comprehensive boundary tests.
+
+#### Decision:
+Implemented `Cutoff64`, `dprime_accepts`, `dprime_cutoff_for_level`, and `dprime_expected_level_from_cutoff`. Verified 402 assertions with 0 failures and clean sanitizer runs.
+
+#### Why:
+Prevents IEEE 754 precision issues and ensures machine-exact implementation fidelity.
+
+#### Alternative(s):
+Using `double` cutoff with `(c + 0.5) / 18446744073709551616.0`. Strictly forbidden per PLAN Section 13.
+
+#### Final Status:
+APPROVED / PASS

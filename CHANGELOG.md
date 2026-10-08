@@ -23,3 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
   - Implemented `SplitMix64`, canonical `xoshiro256** 1.0` (`Xoshiro256StarStar`), `SeedHierarchy` (master/experiment/algorithm/trial derivation), `RngInterface`, and `OracleRng`.
   - Added unit test suite `tests/unit/test_case03.cpp` verifying 427 assertions across seed replay, determinism, bit consumption accounting, and independent instances.
   - Passed `GATE-03`.
+- **[CASE-04] Finite Rank and Cutoff64 (`CHG-0005` / `DEC-0005`):**
+  - Implemented exact finite representation `Cutoff64` (`ONE` and `RANK(c)`), exact integer predicate $r < c$, Dprime integer level semantics ($l=0 \to$ accept all, $1 \le l \le 64 \to r < 2^{64-l}$, $l \ge 65 \to$ reject all), and exact mathematical coupling level derivation $l = 65 - \lfloor\log_2(2c+1)\rfloor$.
+  - Added unit test suite `tests/unit/test_case04.cpp` verifying 402 assertions across boundary conditions and coupling consistency.
+  - Passed `GATE-04`.
