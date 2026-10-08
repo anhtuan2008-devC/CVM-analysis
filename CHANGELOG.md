@@ -19,3 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
   - Implemented `FailureStatus`, `EstimateResult`, status invariants, execution validity predicates, schema enums (`AlgorithmId`, `WorkloadId`, `ThresholdState`), `RunProvenance`, and `CardinalityEstimator` concept.
   - Added unit test suite `tests/unit/test_case02.cpp` verifying 72 assertions and contract enforcement.
   - Passed `GATE-02`.
+- **[CASE-03] RNG / Randomness Layer (`CHG-0004` / `DEC-0004`):**
+  - Implemented `SplitMix64`, canonical `xoshiro256** 1.0` (`Xoshiro256StarStar`), `SeedHierarchy` (master/experiment/algorithm/trial derivation), `RngInterface`, and `OracleRng`.
+  - Added unit test suite `tests/unit/test_case03.cpp` verifying 427 assertions across seed replay, determinism, bit consumption accounting, and independent instances.
+  - Passed `GATE-03`.

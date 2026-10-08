@@ -94,3 +94,34 @@ Returning `double` with `-1` or `NaN` on failure. Strictly rejected per PLAN Sec
 
 #### Final Status:
 APPROVED / PASS
+
+---
+
+### Decision ID: DEC-0004
+- **Step:** Step 3
+- **Case:** CASE-03
+- **Change ID:** CHG-0004
+
+#### Problem:
+Need to provide a high-performance, completely deterministic pseudo-randomness layer supporting both fair-bit extraction (`next_bit()`) for A1/W and 64-bit volatility deviates (`next_uint64()`) for D/D', along with a reproducible seed hierarchy and zero global state.
+
+#### Observation:
+PLAN Section 11.2, 19, and 86 require `SplitMix64` for seed mixing, `xoshiro256**` for generation, and an `RngInterface` preventing algorithms from constructing ad-hoc RNGs in hot paths.
+
+#### Plan Requirement:
+Section 19 of `AGENTS.md` mandates `SplitMix64`, `xoshiro256**`, master/experiment/algorithm/trial seed hierarchy, and verification of bit consumption accounting, seed replay, and zero global state.
+
+#### Idea:
+Implement `SplitMix64`, `Xoshiro256StarStar`, `SeedHierarchy`, and `OracleRng` in `include/cvm/core/rng.hpp`.
+
+#### Decision:
+Implemented all required PRNG classes, buffered bit extraction in `next_bit()`, accurate `bits_consumed()` and `uint64_consumed()` accounting, and verified determinism across 427 test assertions.
+
+#### Why:
+Guarantees identical replayability, reproducible experiments, and isolates algorithm logic from PRNG details.
+
+#### Alternative(s):
+Using `std::mt19937_64` or `rand()`. Rejected due to non-standard bit extraction, slower performance, and violation of PLAN Section 11.2.
+
+#### Final Status:
+APPROVED / PASS
