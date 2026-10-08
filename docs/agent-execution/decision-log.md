@@ -156,3 +156,34 @@ Using `double` cutoff with `(c + 0.5) / 18446744073709551616.0`. Strictly forbid
 
 #### Final Status:
 APPROVED / PASS
+
+---
+
+### Decision ID: DEC-0006
+- **Step:** Step 5
+- **Case:** CASE-05
+- **Change ID:** CHG-0006
+
+#### Problem:
+Need to implement CVM Algorithm 1 strictly according to verified S1 Algorithm 1 semantics (remove key, sample with $p$, insert, halving when $|X|=s$, and abort if $|X|=s$ after halving) without reordering or shortcutting.
+
+#### Observation:
+PLAN Section 7.1 and 51 define the exact sequence of steps A1.1 to A1.5. S2 Appendix provides an exact analytical reference for $s=2$ on 3 distinct elements (Fixture F1: $P(\mathrm{failure}) = 5/16$, $E[\hat F_0 \mid \neg\mathrm{failure}] = 20/11$).
+
+#### Plan Requirement:
+Section 21 of `AGENTS.md` mandates strict sequential order, no presumed equivalent algorithms, testing boundary conditions ($s=F_0, s=F_0+1, s>F_0$), and verifying Fixture F1.
+
+#### Idea:
+Create `include/cvm/core/cvm_a1.hpp` using swap-remove for deletion, bit extraction via `RngInterface`, and comprehensive unit tests in `tests/unit/test_case05.cpp`.
+
+#### Decision:
+Implemented `CvmA1<Key>`, verified empty/single/duplicate/distinct behavior, exact capacity threshold boundary ($s > F_0$ exact vs $s=F_0$ not guaranteed exact), abort on full post-halving, and confirmed Fixture F1.
+
+#### Why:
+Preserves 100% source fidelity with S1 Algorithm 1 and provides a verified baseline for CVM-A1.
+
+#### Alternative(s):
+Looping halving until buffer size decreases. Rejected because that is CVM-W, not S1 Algorithm 1.
+
+#### Final Status:
+APPROVED / PASS

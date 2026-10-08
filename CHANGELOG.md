@@ -27,3 +27,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
   - Implemented exact finite representation `Cutoff64` (`ONE` and `RANK(c)`), exact integer predicate $r < c$, Dprime integer level semantics ($l=0 \to$ accept all, $1 \le l \le 64 \to r < 2^{64-l}$, $l \ge 65 \to$ reject all), and exact mathematical coupling level derivation $l = 65 - \lfloor\log_2(2c+1)\rfloor$.
   - Added unit test suite `tests/unit/test_case04.cpp` verifying 402 assertions across boundary conditions and coupling consistency.
   - Passed `GATE-04`.
+- **[CASE-05] CVM-A1 Algorithm Implementation (`CHG-0006` / `DEC-0006`):**
+  - Implemented canonical CVM Algorithm 1 (`CvmA1<Key>`) per S1 Algorithm 1 semantics (Step A1.1 to A1.5) with halving and abort trigger.
+  - Added unit test suite `tests/unit/test_case05.cpp` verifying 36 assertions including capacity boundaries ($s > F_0$ exact guarantee) and Source Fixture F1 ($P(\mathrm{fail}) = 5/16$, $E[\hat F_0 \mid \neg\mathrm{fail}] = 20/11$).
+  - Passed `GATE-05`.

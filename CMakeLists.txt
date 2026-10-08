@@ -28,3 +28,7 @@ add_test(NAME test_case03 COMMAND test_case03)
 # Case 04 test executable
 add_executable(test_case04 tests/unit/test_case04.cpp)
 add_test(NAME test_case04 COMMAND test_case04)
+
+# Case 05 test executable
+add_executable(test_case05 tests/unit/test_case05.cpp)
+add_test(NAME test_case05 COMMAND test_case05)
