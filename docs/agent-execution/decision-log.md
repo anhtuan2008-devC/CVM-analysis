@@ -218,3 +218,34 @@ Converting $\Delta t = 0$ to $1$ to avoid zero division. Strictly prohibited per
 
 #### Final Status:
 APPROVED / PASS
+
+---
+
+### Decision ID: DEC-0008
+- **Step:** Step 7
+- **Case:** CASE-07
+- **Change ID:** CHG-0008
+
+#### Problem:
+Need high-performance, cache-friendly data structures for A1/W algorithms satisfying PLAN Section 83 and AGENTS.md Case 07: `dense vector<Key>` coupled with `key -> dense-index map`, $O(1)$ swap-remove, zero stale indices, and zero allocations on steady-state update path after `reserve()`, strictly prohibiting swap-delete inside hash table physical slots.
+
+#### Observation:
+Naive hash sets cannot be swap-deleted without destroying probe sequences. A contiguous vector storage `elements_` paired with an open-addressed index map `KeyIndexMap` (using Knuth Algorithm 6.4R backward-shift deletion) achieves tombstone-free $O(1)$ operations with zero general-purpose allocations after initial reservation.
+
+#### Plan Requirement:
+PLAN Section 83, 124 and AGENTS.md Case 23 mandate implementing `DenseKeySet` and `KeyIndexMap`, and passing 8 mandatory adversarial tests (remove first, remove middle, remove last, remove same key repeatedly, remove key after swap, insert after many swaps, duplicate after swap, full-capacity transition) and zero memory leaks under sanitizers.
+
+#### Idea:
+Implement `KeyIndexMap` in `include/cvm/ds/key_index_map.hpp` with power-of-two table size, load factor $\le 0.5$, SplitMix64 finalizer hashing, and backward-shift deletion. Implement `DenseKeySet` in `include/cvm/ds/dense_key_set.hpp` wrapping `vector<Key>` and `KeyIndexMap<Key, uint32_t>`, and verify all requirements in `tests/unit/test_case07.cpp`.
+
+#### Decision:
+Implemented both structures cleanly. Verified all 8 adversarial scenarios, backward-shift deletion with artificial collision clusters, zero vector reallocations post-reserve, batch in-place filtering with index rebuild, and ASan/UBSan clean execution across 147 assertions and thousands of runtime invariant checks.
+
+#### Why:
+Provides the canonical, optimal, and mathematically robust storage layer required for scalable A1 and W streaming cardinality estimators.
+
+#### Alternative(s):
+Using `std::unordered_map` with node-based allocations or open-addressing with tombstones. Rejected because node maps allocate on each insert, and tombstones degrade probe sequences under continuous streaming updates.
+
+#### Final Status:
+APPROVED / PASS

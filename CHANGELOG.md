@@ -35,3 +35,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
   - Implemented Knuth's modified Algorithm X (`CvmW<Key>`) with `while |X| == s`, no algorithmic abort, post-update $|X| \le s - 1$ invariant, and detailed `ReductionEvent` cascade tracking.
   - Added unit test suite `tests/unit/test_case06.cpp` verifying 1032 assertions, including multi-halving cascade semantics with uncoerced $\Delta t = 0$ (`delta_t_valid == false`).
   - Passed `GATE-06`.
+- **[CASE-07] A1/W Data Structures (`CHG-0008` / `DEC-0008`):**
+  - Implemented `KeyIndexMap` (`include/cvm/ds/key_index_map.hpp`) open-addressing table with SplitMix64 mixing, load factor $\le 0.5$, and Knuth Algorithm 6.4R backward-shift deletion (tombstone-free).
+  - Implemented `DenseKeySet` (`include/cvm/ds/dense_key_set.hpp`) pairing dense `vector<Key>` with reverse index map for $O(1)$ swap-remove without stale indices.
+  - Added unit test suite `tests/unit/test_case07.cpp` verifying 147 assertions across all 8 mandatory adversarial scenarios, zero allocations post-reserve, batch in-place filtering, and clean ASan/UBSan runs.
+  - Passed `GATE-07`.
