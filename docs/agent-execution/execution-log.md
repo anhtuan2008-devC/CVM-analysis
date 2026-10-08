@@ -10,3 +10,4 @@ This log records the sequential gated execution history of the `CVM-analysis` pr
 | 2026-10-09T00:28:00+07:00 | CASE-03 | RNG / Randomness Layer | PASS | Implemented `SplitMix64`, `xoshiro256**`, `SeedHierarchy`, `RngInterface`, `OracleRng`. 427/427 tests passed. GATE-03 PASS. |
 | 2026-10-09T00:32:00+07:00 | CASE-04 | Finite Rank and Cutoff64 | PASS | Implemented `rank.hpp`, `cutoff64.hpp`, Dprime binary levels and coupling derivation. 402/402 tests passed. GATE-04 PASS. |
 | 2026-10-09T00:37:00+07:00 | CASE-05 | CVM-A1 Algorithm Implementation | PASS | Implemented `cvm_a1.hpp`. All 36 tests passed, including F1 fixture verification. GATE-05 PASS. |
+| 2026-10-09T00:41:00+07:00 | CASE-06 | CVM-W Algorithm Implementation | PASS | Implemented `cvm_w.hpp`. 1032/1032 tests passed, verified post-update |X|<=s-1 and delta_t=0 cascade semantics. GATE-06 PASS. |

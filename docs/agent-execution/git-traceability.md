@@ -9,4 +9,5 @@ This document maps PLAN sections, cases, decisions, sources, and tests to Git co
 | CASE-02 | CHG-0003 | DEC-0003 | ecdc56f | ebeae2e | include/cvm/core/*, tests/*, CMakeLists.txt | TEST-CASE02-SEMANTICS | PASS |
 | CASE-03 | CHG-0004 | DEC-0004 | ebeae2e | 61093ee | include/cvm/core/rng.hpp, tests/unit/test_case03.cpp | TEST-CASE03-RNG | PASS |
 | CASE-04 | CHG-0005 | DEC-0005 | 61093ee | 1aa7e09 | include/cvm/core/rank.hpp, include/cvm/ds/cutoff64.hpp, tests/unit/test_case04.cpp | TEST-CASE04-RANK | PASS |
-| CASE-05 | CHG-0006 | DEC-0006 | 1aa7e09 | 2010b8f | include/cvm/core/cvm_a1.hpp, tests/unit/test_case05.cpp | TEST-CASE05-A1 | PASS |
+| CASE-05 | CHG-0006 | DEC-0006 | 1aa7e09 | 1770233 | include/cvm/core/cvm_a1.hpp, tests/unit/test_case05.cpp | TEST-CASE05-A1 | PASS |
+| CASE-06 | CHG-0007 | DEC-0007 | 1770233 | d37bc76 | include/cvm/core/cvm_w.hpp, tests/unit/test_case06.cpp, CMakeLists.txt | TEST-CASE06-W | PASS |

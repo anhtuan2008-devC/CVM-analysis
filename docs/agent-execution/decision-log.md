@@ -187,3 +187,34 @@ Looping halving until buffer size decreases. Rejected because that is CVM-W, not
 
 #### Final Status:
 APPROVED / PASS
+
+---
+
+### Decision ID: DEC-0007
+- **Step:** Step 6
+- **Case:** CASE-06
+- **Change ID:** CHG-0007
+
+#### Problem:
+Need to implement Knuth's modified Algorithm X (CVM-W) from S2 Appendix with `while |X| == s`, no source-level abort, guaranteed $|X| \le s - 1$ post-update invariant, and explicit recording of same-step cascades with $\Delta t = 0$ and $\mathrm{delta\_t\_valid} = \mathrm{false}$ without converting $0$ to $1$.
+
+#### Observation:
+PLAN Section 7.2, 8, 37, and 38 mandate loop halving, post-update capacity bounded by $s-1$, $s \ge 2$, and precise logging of each reduction event.
+
+#### Plan Requirement:
+Section 22 of `AGENTS.md` mandates testing multi-halving cascades, explicit verification of $\Delta t = 0$, duplicate deletion, and parameter-shift invariant.
+
+#### Idea:
+Create `include/cvm/core/cvm_w.hpp` implementing `CvmW<Key>` and `ReductionEvent` tracking, tested in `tests/unit/test_case06.cpp`.
+
+#### Decision:
+Implemented `CvmW<Key>`, verified the post-update invariant across 1000 stream items, constructed controlled cascade fixtures confirming $\Delta t = 0$ with `delta_t_valid == false`, and verified 1032 test assertions.
+
+#### Why:
+Guarantees source fidelity with S2 Appendix Algorithm X and enables downstream RQ2 dynamics studies.
+
+#### Alternative(s):
+Converting $\Delta t = 0$ to $1$ to avoid zero division. Strictly prohibited per PLAN Section 37.
+
+#### Final Status:
+APPROVED / PASS

@@ -31,3 +31,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
   - Implemented canonical CVM Algorithm 1 (`CvmA1<Key>`) per S1 Algorithm 1 semantics (Step A1.1 to A1.5) with halving and abort trigger.
   - Added unit test suite `tests/unit/test_case05.cpp` verifying 36 assertions including capacity boundaries ($s > F_0$ exact guarantee) and Source Fixture F1 ($P(\mathrm{fail}) = 5/16$, $E[\hat F_0 \mid \neg\mathrm{fail}] = 20/11$).
   - Passed `GATE-05`.
+- **[CASE-06] CVM-W Algorithm Implementation (`CHG-0007` / `DEC-0007`):**
+  - Implemented Knuth's modified Algorithm X (`CvmW<Key>`) with `while |X| == s`, no algorithmic abort, post-update $|X| \le s - 1$ invariant, and detailed `ReductionEvent` cascade tracking.
+  - Added unit test suite `tests/unit/test_case06.cpp` verifying 1032 assertions, including multi-halving cascade semantics with uncoerced $\Delta t = 0$ (`delta_t_valid == false`).
+  - Passed `GATE-06`.
