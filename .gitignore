@@ -1,19 +1,52 @@
-# Build directories
+# Build directories and artifacts
 build/
+build_san/
 bin/
 lib/
+out/
 
-# Temporary files
+# Object and binary files
 *.o
 *.a
 *.so
+*.dylib
+*.dll
+*.exe
 *.out
+
+# Temporary and backup files
+*~
+*.swp
+*.swo
+*.bak
+*.tmp
 /tmp/
 
-# Cache
+# Cache and CMake generated files
 .cache/
 .ninja_*
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
 Makefile
+CTestTestfile.cmake
+Testing/
+compile_commands.json
+
+# IDE and Editor configurations
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated junk
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Log files
+*.log
