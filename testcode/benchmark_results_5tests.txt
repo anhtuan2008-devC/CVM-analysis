@@ -1,0 +1,131 @@
+=========================================================================================================
+                                 CVM-A1 BENCHMARK REPORT (5 EXTENDED TESTS)
+=========================================================================================================
+Test Specification:
+ - Stream size N:        700,000 to 1,000,000 items
+ - Distinct items F0:    45,000 to 60,000 items
+ - Buffer capacities s:  3,000 to 5,000 items
+ - Distributions:        Uniform, Zipf (skewed), Repeat
+---------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------
+TEST CASE #1 DETAILS:
+  * Configuration:
+      - Total Elements (N):         700000
+      - Target Distinct (F0):       45000
+      - Distribution:               uniform
+      - Buffer Capacity (s):        3000
+      - Random Seed:                101
+  * Accuracy & Estimation:
+      - Ground Truth Distinct (F0): 45000
+      - CVM-A1 Estimated (F0_hat):  44352.00
+      - Accuracy Ratio:             98.560 %
+      - Relative Error:             1.440 %
+  * Performance:
+      - Elapsed Time:               3625.48 ms (3.63 s)
+      - Throughput:                 0.193 million items/sec
+  * Internal Metrics:
+      - Final Buffer Size (|X|):    2772 / 3000
+      - Halving Rounds (l):         4 (Sampling probability p = 2^-4)
+      - Duplicate Removals:         40666
+      - Status:                     SUCCESS
+
+---------------------------------------------------------------------------------------------------------
+TEST CASE #2 DETAILS:
+  * Configuration:
+      - Total Elements (N):         800000
+      - Target Distinct (F0):       50000
+      - Distribution:               zipf
+      - Buffer Capacity (s):        3500
+      - Random Seed:                202
+  * Accuracy & Estimation:
+      - Ground Truth Distinct (F0): 50000
+      - CVM-A1 Estimated (F0_hat):  49984.00
+      - Accuracy Ratio:             99.968 %
+      - Relative Error:             0.032 %
+  * Performance:
+      - Elapsed Time:               1683.81 ms (1.68 s)
+      - Throughput:                 0.475 million items/sec
+  * Internal Metrics:
+      - Final Buffer Size (|X|):    3124 / 3500
+      - Halving Rounds (l):         4 (Sampling probability p = 2^-4)
+      - Duplicate Removals:         46999
+      - Status:                     SUCCESS
+
+---------------------------------------------------------------------------------------------------------
+TEST CASE #3 DETAILS:
+  * Configuration:
+      - Total Elements (N):         850000
+      - Target Distinct (F0):       50000
+      - Distribution:               repeat
+      - Buffer Capacity (s):        4000
+      - Random Seed:                303
+  * Accuracy & Estimation:
+      - Ground Truth Distinct (F0): 50000
+      - CVM-A1 Estimated (F0_hat):  51440.00
+      - Accuracy Ratio:             102.880 %
+      - Relative Error:             2.880 %
+  * Performance:
+      - Elapsed Time:               4169.59 ms (4.17 s)
+      - Throughput:                 0.204 million items/sec
+  * Internal Metrics:
+      - Final Buffer Size (|X|):    3215 / 4000
+      - Halving Rounds (l):         4 (Sampling probability p = 2^-4)
+      - Duplicate Removals:         50150
+      - Status:                     SUCCESS
+
+---------------------------------------------------------------------------------------------------------
+TEST CASE #4 DETAILS:
+  * Configuration:
+      - Total Elements (N):         900000
+      - Target Distinct (F0):       55000
+      - Distribution:               uniform
+      - Buffer Capacity (s):        4500
+      - Random Seed:                404
+  * Accuracy & Estimation:
+      - Ground Truth Distinct (F0): 55000
+      - CVM-A1 Estimated (F0_hat):  55936.00
+      - Accuracy Ratio:             101.702 %
+      - Relative Error:             1.702 %
+  * Performance:
+      - Elapsed Time:               7134.22 ms (7.13 s)
+      - Throughput:                 0.126 million items/sec
+  * Internal Metrics:
+      - Final Buffer Size (|X|):    3496 / 4500
+      - Halving Rounds (l):         4 (Sampling probability p = 2^-4)
+      - Duplicate Removals:         52976
+      - Status:                     SUCCESS
+
+---------------------------------------------------------------------------------------------------------
+TEST CASE #5 DETAILS:
+  * Configuration:
+      - Total Elements (N):         1000000
+      - Target Distinct (F0):       60000
+      - Distribution:               zipf
+      - Buffer Capacity (s):        5000
+      - Random Seed:                505
+  * Accuracy & Estimation:
+      - Ground Truth Distinct (F0): 60000
+      - CVM-A1 Estimated (F0_hat):  59168.00
+      - Accuracy Ratio:             98.613 %
+      - Relative Error:             1.387 %
+  * Performance:
+      - Elapsed Time:               3222.06 ms (3.22 s)
+      - Throughput:                 0.310 million items/sec
+  * Internal Metrics:
+      - Final Buffer Size (|X|):    3698 / 5000
+      - Halving Rounds (l):         4 (Sampling probability p = 2^-4)
+      - Duplicate Removals:         59168
+      - Status:                     SUCCESS
+
+=========================================================================================================
+                                         SUMMARY COMPARISON TABLE
+=========================================================================================================
+| Test |     N     | Ground Truth | Buffer s | Distribution | Estimated F0 | Rel. Error | Time (ms) | Status  |
+|:----:|:---------:|:------------:|:--------:|:------------:|:------------:|:----------:|:---------:|:-------:|
+|   1  |    700000 |        45000 |     3000 |      uniform |      44352.0 |     1.44% |    3625.5 |  SUCCESS |
+|   2  |    800000 |        50000 |     3500 |         zipf |      49984.0 |     0.03% |    1683.8 |  SUCCESS |
+|   3  |    850000 |        50000 |     4000 |       repeat |      51440.0 |     2.88% |    4169.6 |  SUCCESS |
+|   4  |    900000 |        55000 |     4500 |      uniform |      55936.0 |     1.70% |    7134.2 |  SUCCESS |
+|   5  |   1000000 |        60000 |     5000 |         zipf |      59168.0 |     1.38% |    3222.1 |  SUCCESS |
+=========================================================================================================
